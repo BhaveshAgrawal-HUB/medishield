@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | MediShield</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="glass"
+         style="
+            margin:20px;
+            padding:15px 30px;
+            display:flex;
+            align-items:center;
+            position:relative;
+            z-index:10;
+         ">
+
+        <!-- LOGO (LEFT) -->
+        <h2>
+            <a href="/" style="text-decoration:none; color:white;">
+                MediShield
+            </a>
+        </h2>
+
+        <!-- RIGHT SIDE -->
+        <div style="
+                margin-left:auto;
+                display:flex;
+                align-items:center;
+                gap:20px;
+                position:relative;
+            ">
+
+            <!-- PROFILE ICON -->
+            <span class="profile-icon"
+                  onclick="toggleDropdown()"
+                  style="font-size:22px; cursor:pointer;">
+                👤
+            </span>
+
+            <!-- DROPDOWN -->
+            <div id="profileDropdown"
+                 class="glass"
+                 style="
+                    display:none;
+                    position:absolute;
+                    top:40px;
+                    right:0;
+                    width:160px;
+                    padding:15px;
+                    z-index:999;
+                 ">
+
+                <a href="#"
+                   style="display:block; color:white; text-decoration:none; margin-bottom:10px;">
+                    Profile
+                </a>
+
+                <a href="/"
+                   style="display:block; color:white; text-decoration:none;">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- DASHBOARD CONTENT -->
+    <div style="display:flex; justify-content:center; margin-top:90px;">
+
+        <div class="glass"
+             style="
+                width:500px;
+                padding:40px;
+                text-align:center;
+             ">
+
+            <h2>Dashboard</h2>
+
+            <p style="margin:15px 0 30px; opacity:0.8;">
+                Start predicting personalized medicine side-effect risks
+            </p>
+
+            <!-- ✅ LINK TO PREDICT PAGE -->
+            <a href="/predict">
+                <button class="btn btn-primary"
+                        style="width:100%; margin-bottom:15px;">
+                    Predict Side Effect Risk
+                </button>
+            </a>
+
+            <button class="btn btn-outline" style="width:100%;">
+                View Past Predictions
+            </button>
+
+        </div>
+    </div>
+
+    <!-- DROPDOWN SCRIPT -->
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display =
+                dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function(event) {
+            const dropdown = document.getElementById("profileDropdown");
+            const profileIcon = document.querySelector(".profile-icon");
+
+            if (!profileIcon.contains(event.target) &&
+                !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
