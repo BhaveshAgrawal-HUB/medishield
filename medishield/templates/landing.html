@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediShield</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding-bottom: 6px;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            color: #8abfff;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: #8abfff;
+            border-radius: 2px;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            display: none;
+            padding: 12px;
+            width: 150px;
+            z-index: 999;
+        }
+
+        .cta-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: #2f9df7;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #8abfff;
+            padding: 16px 28px;
+            border-radius: 10px;
+            font-size: 18px;
+            border: 2px solid #8abfff;
+            cursor: pointer;
+        }
+
+        /* highlight badges (already approved by you) */
+        .card-highlight {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            opacity: 0.9;
+        }
+
+        .card-highlight span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="glass"
+     style="margin:20px; padding:18px 40px; display:flex; align-items:center;">
+
+    <h2>
+        <a href="/" style="text-decoration:none; color:white;">MediShield</a>
+    </h2>
+
+    <div class="nav-links" style="margin-left:50px; display:flex; gap:30px;">
+        <a href="#home" id="nav-home">Home</a>
+        <a href="#features" id="nav-features">Features</a>
+        <a href="#why" id="nav-why">Why MediShield</a>
+        <a href="#how" id="nav-how">How It Works</a>
+    </div>
+
+    <div style="margin-left:auto; position:relative;" id="profileArea">
+        {% if logged_in %}
+            <span id="profileIcon" style="font-size:22px; cursor:pointer;">👤</span>
+
+            <div id="profileDropdown" class="glass dropdown">
+                <a href="#" style="display:block; color:white; text-decoration:none; margin-bottom:10px;">
+                    Profile
+                </a>
+                <a href="/logout" style="display:block; color:white; text-decoration:none;">
+                    Logout
+                </a>
+            </div>
+        {% else %}
+            <a href="/login">
+                <button class="btn btn-outline">Login</button>
+            </a>
+            <a href="/register">
+                <button class="btn btn-primary">Register</button>
+            </a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- HOME -->
+<section id="home"
+         style="height:85vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+
+    <h1 style="font-size:56px; margin-bottom:22px;">
+        Predict Smarter. Heal Safer.
+    </h1>
+
+    <p style="font-size:20px; opacity:0.85; max-width:780px;">
+        MediShield is an AI-powered healthcare platform that transforms
+        patient-specific health data into personalized medicine side-effect
+        risk predictions, enabling safer and more informed treatment decisions.
+    </p>
+
+    <div class="cta-container">
+        <a href="/predict">
+            <button class="cta-primary">Predict Side Effect Risk →</button>
+        </a>
+        <a href="#how">
+            <button class="cta-secondary">Learn How It Works →</button>
+        </a>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="padding:120px 40px; text-align:center;">
+
+    <h1 style="font-size:56px; margin-bottom:22px;">Core Features</h1>
+
+    <p style="font-size:20px; opacity:0.85; max-width:780px; margin:auto; margin-bottom:60px;">
+        Intelligent capabilities that help predict medicine side effects
+        and support safer healthcare decisions.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:35px; flex-wrap:wrap;">
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>Personalized Prediction</h3>
+            <p>Predict medicine side effects using patient-specific data.</p>
+        </div>
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>AI Risk Analysis</h3>
+            <p>AI models analyze potential risks before treatment begins.</p>
+        </div>
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>Preventive Care</h3>
+            <p>Supports early intervention and safer clinical decisions.</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY MEDISHIELD -->
+<section id="why" style="padding:120px 40px; text-align:center;">
+
+    <h1 style="font-size:56px; margin-bottom:22px;">Why MediShield?</h1>
+
+    <p style="font-size:20px; opacity:0.85; max-width:780px; margin:auto; margin-bottom:60px;">
+        MediShield delivers value that traditional medicine information
+        platforms do not — by focusing on personalized risk prediction
+        and proactive healthcare decision support.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:35px; flex-wrap:wrap;">
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>Personalized Over Generic</h3>
+            <p>Patient-specific insights instead of generic drug data.</p>
+        </div>
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>AI-Assisted Decisions</h3>
+            <p>Data-driven predictions to support doctors and patients.</p>
+        </div>
+        <div class="glass" style="width:300px; padding:35px;">
+            <h3>Proactive Safety</h3>
+            <p>Identify risks before treatment begins.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="padding:120px 40px; text-align:center;">
+
+    <h1 style="font-size:56px; margin-bottom:18px;">How It Works</h1>
+
+    <p style="font-size:20px; opacity:0.85; max-width:780px; margin:auto; margin-bottom:70px;">
+        From patient data to intelligent medicine side-effect risk prediction
+        using an AI-driven workflow.
+    </p>
+
+    <div style="
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap:35px;
+        max-width:1100px;
+        margin:auto;
+    ">
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>1. Patient Data Input</h3>
+            <p>Patient details and prescriptions are securely collected.</p>
+            <div class="card-highlight"><span>🔒</span>Secure Data Handling</div>
+        </div>
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>2. Data Preprocessing</h3>
+            <p>Data is cleaned and standardized for AI analysis.</p>
+            <div class="card-highlight"><span>✔️</span>Data Validation</div>
+        </div>
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>3. Feature Engineering</h3>
+            <p>Key medical indicators are extracted.</p>
+            <div class="card-highlight"><span>⚙️</span>50+ Features</div>
+        </div>
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>4. ML Model Analysis</h3>
+            <p>ML models analyze side-effect patterns.</p>
+            <div class="card-highlight"><span>🧠</span>Ensemble Models</div>
+        </div>
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>5. Risk Prediction</h3>
+            <p>Potential side-effect risks are predicted.</p>
+            <div class="card-highlight"><span>⚠️</span>Risk Stratification</div>
+        </div>
+
+        <div class="glass" style="padding:30px; text-align:center; display:flex; flex-direction:column; height:100%;">
+            <h3>6. Explainable Insights</h3>
+            <p>Transparent AI insights support decisions.</p>
+            <div class="card-highlight"><span>📊</span>Explainable AI</div>
+        </div>
+
+    </div>
+</section>
+<script>
+/* ===== Profile Dropdown ===== */
+const profileIcon = document.getElementById("profileIcon");
+const dropdown = document.getElementById("profileDropdown");
+const profileArea = document.getElementById("profileArea");
+
+if (profileIcon) {
+    profileIcon.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!profileArea.contains(e.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+}
+
+
+/* ===== Navbar Scroll Highlight ===== */
+const sections = [
+    { id: "home", nav: "nav-home" },
+    { id: "features", nav: "nav-features" },
+    { id: "why", nav: "nav-why" },
+    { id: "how", nav: "nav-how" }
+];
+
+window.addEventListener("scroll", () => {
+    let currentSection = "";
+
+    sections.forEach(section => {
+        const element = document.getElementById(section.id);
+        const sectionTop = element.offsetTop - 200;
+
+        if (window.scrollY >= sectionTop) {
+            currentSection = section.nav;
+        }
+    });
+
+    sections.forEach(section => {
+        document.getElementById(section.nav).classList.remove("active");
+    });
+
+    if (currentSection) {
+        document.getElementById(currentSection).classList.add("active");
+    }
+});
+</script>
+
+
+</body>
+</html>
