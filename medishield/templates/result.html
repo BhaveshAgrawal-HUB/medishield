@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result | MediShield</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="glass"
+         style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
+
+        <h2>
+            <a href="/" style="text-decoration:none; color:white;">MediShield</a>
+        </h2>
+
+        <div style="margin-left:auto;">
+            <a href="/dashboard">
+                <button class="btn btn-outline">Dashboard</button>
+            </a>
+        </div>
+    </nav>
+
+    <!-- RESULT CARD -->
+    <div style="height:85vh; display:flex; justify-content:center; align-items:center;">
+
+        <div class="glass" style="width:420px; padding:35px; text-align:center;">
+
+            <h2>Prediction Result</h2>
+
+            <p style="margin:20px 0; font-size:18px;">
+                Predicted Risk Level:
+                <strong style="color:#f39c12;">MODERATE</strong>
+            </p>
+
+            <p style="font-size:14px; opacity:0.85;">
+                This is a prototype output.  
+                Actual predictions will be generated using
+                machine learning models in the next phase.
+            </p>
+
+            <a href="/predict">
+                <button class="btn btn-primary" style="margin-top:25px; width:100%;">
+                    Predict Again
+                </button>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | MediShield</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div style="
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+">
+
+    <div class="glass" style="width:380px; padding:40px; text-align:center;">
+
+        <h2 style="margin-bottom:25px;">Register</h2>
+
+        <!-- IMPORTANT: method="POST" -->
+        <form method="POST">
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email"
+                   required
+                   style="width:100%; padding:12px; margin-bottom:15px;">
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   required
+                   style="width:100%; padding:12px; margin-bottom:25px;">
+
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                Register
+            </button>
+
+        </form>
+
+        <p style="margin-top:20px; font-size:14px;">
+            Already have an account?
+            <a href="/login" style="color:#8abfff;">Login</a>
+        </p>
+
+    </div>
+</div>
+
+</body>
+</html>

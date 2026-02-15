@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict | MediShield</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="glass"
+     style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
+
+    <h2>
+        <a href="/" style="text-decoration:none; color:white;">
+            MediShield
+        </a>
+    </h2>
+
+    <div style="margin-left:auto;">
+        <!-- BACK TO LANDING -->
+        <a href="/">
+            <button class="btn btn-outline">
+                ← Back
+            </button>
+        </a>
+    </div>
+</nav>
+
+<!-- PREDICT FORM -->
+<div style="
+    height:85vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+">
+
+    <div class="glass" style="width:450px; padding:35px;">
+
+        <h2 style="text-align:center; margin-bottom:25px;">
+            Predict Side Effect Risk
+        </h2>
+
+        <form>
+
+            <label>Age</label>
+            <input type="number" required
+                   style="width:100%; padding:10px; margin-bottom:15px;">
+
+            <label>Gender</label>
+            <select style="width:100%; padding:10px; margin-bottom:15px;">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label>Medicine Name</label>
+            <input type="text" required
+                   style="width:100%; padding:10px; margin-bottom:15px;">
+
+            <label>Dosage (mg)</label>
+            <input type="number" required
+                   style="width:100%; padding:10px; margin-bottom:15px;">
+
+            <label>Duration (days)</label>
+            <input type="number" required
+                   style="width:100%; padding:10px; margin-bottom:25px;">
+
+            <a href="/result">
+                <button type="button" class="btn btn-primary" style="width:100%;">
+                    Predict Risk →
+                </button>
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
