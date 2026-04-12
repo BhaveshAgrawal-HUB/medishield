@@ -71,7 +71,6 @@
             cursor: pointer;
         }
 
-        /* highlight badges (already approved by you) */
         .card-highlight {
             margin-top: 18px;
             display: inline-flex;
@@ -112,7 +111,8 @@
             <span id="profileIcon" style="font-size:22px; cursor:pointer;">👤</span>
 
             <div id="profileDropdown" class="glass dropdown">
-                <a href="#" style="display:block; color:white; text-decoration:none; margin-bottom:10px;">
+                <!-- 🔥 ONLY CHANGE HERE -->
+                <a href="/profile" style="display:block; color:white; text-decoration:none; margin-bottom:10px;">
                     Profile
                 </a>
                 <a href="/logout" style="display:block; color:white; text-decoration:none;">
@@ -146,10 +146,14 @@
 
     <div class="cta-container">
         <a href="/predict">
-            <button class="cta-primary">Predict Side Effect Risk →</button>
+            <button class="btn btn-primary" style="padding:16px 28px; font-size:18px;">
+                Predict Side Effect Risk →
+            </button>
         </a>
         <a href="#how">
-            <button class="cta-secondary">Learn How It Works →</button>
+            <button class="btn btn-outline" style="padding:16px 28px; font-size:18px;">
+                Learn How It Works →
+            </button>
         </a>
     </div>
 </section>
@@ -263,8 +267,8 @@
 
     </div>
 </section>
+
 <script>
-/* ===== Profile Dropdown ===== */
 const profileIcon = document.getElementById("profileIcon");
 const dropdown = document.getElementById("profileDropdown");
 const profileArea = document.getElementById("profileArea");
@@ -283,8 +287,6 @@ if (profileIcon) {
     });
 }
 
-
-/* ===== Navbar Scroll Highlight ===== */
 const sections = [
     { id: "home", nav: "nav-home" },
     { id: "features", nav: "nav-features" },
@@ -313,7 +315,6 @@ window.addEventListener("scroll", () => {
     }
 });
 </script>
-
 
 </body>
 </html>
