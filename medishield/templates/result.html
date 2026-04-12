@@ -3,50 +3,137 @@
 <head>
     <title>Prediction Result | MediShield</title>
     <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        .left-box {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .right-box {
+            flex: 2;
+            padding: 25px;
+        }
+
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .bar {
+            height: 8px;
+            border-radius: 5px;
+            margin-top: 5px;
+            background: linear-gradient(90deg, #2f9df7, #1abc9c);
+        }
+
+        .confidence-text {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .insight {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="glass"
-         style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
+<!-- NAVBAR -->
+<nav class="glass" style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
+    <h2><a href="/" style="color:white;">MediShield</a></h2>
 
-        <h2>
-            <a href="/" style="text-decoration:none; color:white;">MediShield</a>
-        </h2>
-
-        <div style="margin-left:auto;">
-            <a href="/dashboard">
-                <button class="btn btn-outline">Dashboard</button>
-            </a>
-        </div>
-    </nav>
-
-    <!-- RESULT CARD -->
-    <div style="height:85vh; display:flex; justify-content:center; align-items:center;">
-
-        <div class="glass" style="width:420px; padding:35px; text-align:center;">
-
-            <h2>Prediction Result</h2>
-
-            <p style="margin:20px 0; font-size:18px;">
-                Predicted Risk Level:
-                <strong style="color:#f39c12;">MODERATE</strong>
-            </p>
-
-            <p style="font-size:14px; opacity:0.85;">
-                This is a prototype output.  
-                Actual predictions will be generated using
-                machine learning models in the next phase.
-            </p>
-
-            <a href="/predict">
-                <button class="btn btn-primary" style="margin-top:25px; width:100%;">
-                    Predict Again
-                </button>
-            </a>
-
-        </div>
+    <div style="margin-left:auto;">
+        <a href="/profile"><button class="btn btn-outline">Profile</button></a>
+        <a href="/logout"><button class="btn btn-outline">Logout</button></a>
     </div>
+</nav>
+
+<!-- MAIN -->
+<div style="margin-top:40px;">
+
+<div class="glass container">
+
+    <!-- LEFT SIDE (USER INFO) -->
+    <div class="left-box">
+
+        <h3>Patient Info</h3>
+
+        <p><strong>Age:</strong> {{ age }}</p>
+        <p><strong>Gender:</strong> {{ gender }}</p>
+        <p><strong>Conditions:</strong> {{ conditions }}</p>
+
+        <!-- AGE CATEGORY -->
+        {% if age|int < 18 %}
+            <p><strong>Category:</strong> Child</p>
+        {% elif age|int < 60 %}
+            <p><strong>Category:</strong> Adult</p>
+        {% else %}
+            <p><strong>Category:</strong> Senior</p>
+        {% endif %}
+
+        <div class="insight">
+            💡 Predictions vary based on patient demographics like age and conditions.
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE (RESULTS) -->
+    <div class="right-box">
+
+        <h2>Prediction Result</h2>
+
+        {% for effect, confidence in results %}
+
+        <div class="result-card">
+            <strong style="color:#2f9df7;">{{ effect }}</strong><br>
+            {{ confidence }}%
+
+            <div class="bar" style="width: {{ confidence }}%;"></div>
+
+            <!-- CONFIDENCE EXPLANATION -->
+            <div class="confidence-text">
+                {% if confidence > 70 %}
+                    High confidence prediction
+                {% elif confidence > 40 %}
+                    Moderate confidence prediction
+                {% else %}
+                    Low confidence prediction
+                {% endif %}
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <!-- GLOBAL EXPLANATION -->
+        <div class="insight">
+            📊 Confidence represents the model's probability based on learned patterns from data.
+            Higher confidence indicates stronger prediction reliability.
+        </div>
+
+        <a href="/predict">
+            <button class="btn btn-primary" style="width:100%; margin-top:20px;">
+                Predict Again
+            </button>
+        </a>
+
+    </div>
+
+</div>
+</div>
 
 </body>
 </html>
