@@ -53,7 +53,7 @@ model = RandomForestClassifier(
 model.fit(X, y)
 
 # SAVE
-joblib.dump(model, "model.pkl")
+joblib.dump(model, "model.pkl", compress=3)
 joblib.dump(le_drug, "le_drug.pkl")
 joblib.dump(le_side, "le_side.pkl")
 
