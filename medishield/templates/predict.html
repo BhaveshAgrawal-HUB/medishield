@@ -7,73 +7,103 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="glass"
-     style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
+<nav class="glass" style="margin:20px; padding:15px 30px; display:flex; align-items:center;">
 
     <h2>
-        <a href="/" style="text-decoration:none; color:white;">
-            MediShield
-        </a>
+        <a href="/" style="color:white;">MediShield</a>
     </h2>
 
-    <div style="margin-left:auto;">
-        <!-- BACK TO LANDING -->
-        <a href="/">
-            <button class="btn btn-outline">
-                ← Back
-            </button>
-        </a>
+    <div style="margin-left:auto; position:relative;" id="profileArea">
+
+        {% if session.get('user') %}
+            <span id="profileIcon" style="font-size:22px; cursor:pointer;">👤</span>
+
+            <div id="profileDropdown" class="glass dropdown" style="display:none; position:absolute; right:0; top:40px;">
+                <a href="/profile" style="display:block; color:white; margin-bottom:10px;">Profile</a>
+                <a href="/logout" style="display:block; color:white;">Logout</a>
+            </div>
+        {% else %}
+            <a href="/login">
+                <button class="btn btn-outline">Login</button>
+            </a>
+            <a href="/register">
+                <button class="btn btn-primary">Register</button>
+            </a>
+        {% endif %}
+
     </div>
 </nav>
 
-<!-- PREDICT FORM -->
-<div style="
-    height:85vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-">
+<script>
+const profileIcon = document.getElementById("profileIcon");
+const dropdown = document.getElementById("profileDropdown");
+const profileArea = document.getElementById("profileArea");
 
-    <div class="glass" style="width:450px; padding:35px;">
+if (profileIcon) {
+    profileIcon.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+    });
 
-        <h2 style="text-align:center; margin-bottom:25px;">
-            Predict Side Effect Risk
-        </h2>
+    document.addEventListener("click", function (e) {
+        if (!profileArea.contains(e.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+}
+</script>
 
-        <form>
+<!-- MAIN -->
+<div style="min-height:85vh; display:flex; justify-content:center; align-items:center;">
 
-            <label>Age</label>
-            <input type="number" required
-                   style="width:100%; padding:10px; margin-bottom:15px;">
+<div class="glass" style="width:550px; padding:35px;">
 
-            <label>Gender</label>
-            <select style="width:100%; padding:10px; margin-bottom:15px;">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-            </select>
+<h2 style="text-align:center; margin-bottom:25px;">
+    Predict Side Effect
+</h2>
 
-            <label>Medicine Name</label>
-            <input type="text" required
-                   style="width:100%; padding:10px; margin-bottom:15px;">
+<form method="POST" action="/predict">
 
-            <label>Dosage (mg)</label>
-            <input type="number" required
-                   style="width:100%; padding:10px; margin-bottom:15px;">
+    <!-- AGE -->
+    <label>Age</label>
+    <input type="number" name="age" required
+           style="margin-bottom:15px;">
 
-            <label>Duration (days)</label>
-            <input type="number" required
-                   style="width:100%; padding:10px; margin-bottom:25px;">
+    <!-- GENDER -->
+    <label>Gender</label>
+    <select name="gender" required style="margin-bottom:15px;">
+        <option value="" disabled selected>Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
 
-            <a href="/result">
-                <button type="button" class="btn btn-primary" style="width:100%;">
-                    Predict Risk →
-                </button>
-            </a>
+    <!-- CONDITIONS -->
+    <label>Medical Conditions</label>
+    <input type="text" name="conditions"
+           placeholder="e.g. diabetes, hypertension"
+           style="margin-bottom:15px;">
 
-        </form>
+    <!-- MEDICINE -->
+    <label>Medicine Name</label>
+    <input type="text" name="drug" required
+           list="drug-list"
+           placeholder="Enter medicine name"
+           style="margin-bottom:20px;">
 
-    </div>
+    <datalist id="drug-list">
+        {% for d in drugs %}
+        <option value="{{ d }}">
+        {% endfor %}
+    </datalist>
+
+    <button type="submit" class="btn btn-primary" style="width:100%;">
+        Predict Side Effect →
+    </button>
+
+</form>
+
+</div>
 </div>
 
 </body>
